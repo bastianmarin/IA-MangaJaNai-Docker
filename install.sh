@@ -40,7 +40,7 @@ fi
 
 # 8. Install the required Python packages
 source venv/bin/activate
-pip install -r src/requirements.txt
+pip install -r requirements.txt
 
 # 9. Install torch and torchvision NVIDEA CUDA 12.1
 pip install torch==2.2.1+cu121 torchvision==0.17.1+cu121 --index-url https://download.pytorch.org/whl/cu121
