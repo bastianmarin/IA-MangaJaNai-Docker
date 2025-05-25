@@ -47,8 +47,16 @@ def extract_images_from_pdfs(input_dir, output_dir):
             except Exception as e:
                 print(f"Error extrayendo imágenes de {filename}: {e}")
 
+def get_python_executable(venv_path):
+    if os.name == "nt":
+        # Windows
+        return os.path.join(venv_path, "Scripts", "python.exe")
+    else:
+        # Linux/Mac: usa el mismo Python que ejecuta este script
+        return sys.executable
+
 def upscale_image_with_mangajanai(image_path, output_folder, venv_path, mangajanai_src_path):
-    python_exe = os.path.join(venv_path, "Scripts", "python.exe")
+    python_exe = get_python_executable(venv_path)
     run_upscale = os.path.join(mangajanai_src_path, "run_upscale.py")
     os.makedirs(output_folder, exist_ok=True)
     cmd = [
@@ -70,7 +78,7 @@ def upscale_image_with_mangajanai(image_path, output_folder, venv_path, mangajan
         print(f"Upscale terminado para {image_path}")
 
 def upscale_folder_with_mangajanai(input_folder, output_folder, venv_path, mangajanai_src_path):
-    python_exe = os.path.join(venv_path, "Scripts", "python.exe")
+    python_exe = get_python_executable(venv_path)
     run_upscale = os.path.join(mangajanai_src_path, "run_upscale.py")
     os.makedirs(output_folder, exist_ok=True)
     cmd = [
