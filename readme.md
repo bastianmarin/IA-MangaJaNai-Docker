@@ -15,6 +15,8 @@ This repository is designed to facilitate the extraction, enhancement (upscale),
 - **GPU:** NVIDIA with at least 12 GB VRAM (e.g., RTX 3060 or higher)
 - **Python:** The script will automatically install Python 3.12 if not present
 
+> **Note:** Currently, **there is no support for NVIDIA 5000 series GPUs** (e.g., RTX 4090, 4080, etc.).
+
 ## Installation
 
 1. **Clone the repository and enter the folder:**

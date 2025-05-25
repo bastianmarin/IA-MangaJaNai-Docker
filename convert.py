@@ -86,7 +86,7 @@ def upscale_folder_with_mangajanai(input_folder, output_folder, venv_path, manga
         run_upscale,
         "-d", input_folder,
         "-o", output_folder,
-        "-u", "4"
+        "-u", "2"
     ]
     def quote(path):
         return f'"{path}"' if ' ' in path else path

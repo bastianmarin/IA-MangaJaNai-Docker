@@ -32,6 +32,7 @@ if [ ! -d "models" ]; then
 fi
 
 # 6. Install the required Python packages globally
+sudo python3.12 -m pip install -r ../requirements.txt
 sudo python3.12 -m pip install -r requirements.txt
 
 # 7. Install torch and torchvision NVIDIA CUDA 12.1 globally
