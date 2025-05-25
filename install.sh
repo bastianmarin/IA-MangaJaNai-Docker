@@ -9,7 +9,7 @@ sudo apt-get install -y git wget unzip build-essential libssl-dev zlib1g-dev lib
 if ! command -v python3.12 &> /dev/null; then
     sudo add-apt-repository ppa:deadsnakes/ppa -y
     sudo apt-get update
-    sudo apt-get install -y python3.12 python3.12-venv python3.12-distutils
+    sudo apt-get install -y python3.12 python3.12-venv
 fi
 
 # 2. Install pip for Python 3.12
