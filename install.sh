@@ -1,5 +1,3 @@
-# 6. Install the required packages
-
 # 0. Update apt, upgrade, and install dependencies
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -15,21 +13,16 @@ fi
 # 2. Install pip for Python 3.12
 curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.12
 
-# 3. Install virtualenv
-sudo python3.12 -m pip install virtualenv
+# 3. Upgrade pip and install required Python packages globally
+sudo python3.12 -m pip install --upgrade pip
 
-# 4. Create a virtual environment with Python 3.12
-if [ ! -d "venv" ]; then
-    python3.12 -m virtualenv venv
-fi
-
-# 6. Clone the IA-MangaJaNai-CLI repository
+# 4. Clone the IA-MangaJaNai-CLI repository
 if [ ! -d "IA-MangaJaNai-CLI" ]; then
     git clone https://github.com/bastianmarin/IA-MangaJaNai-CLI.git
 fi
 cd IA-MangaJaNai-CLI
 
-# 7. Install the required packages
+# 5. Download models if not present
 if [ ! -d "models" ]; then
     mkdir models
     wget -O models/IllustrationJaNai_V1_ModelsOnly.zip https://github.com/the-database/MangaJaNai/releases/download/1.0.0/IllustrationJaNai_V1_ModelsOnly.zip
@@ -38,9 +31,8 @@ if [ ! -d "models" ]; then
     unzip models/MangaJaNai_V1_ModelsOnly.zip -d models
 fi
 
-# 8. Install the required Python packages
-source venv/bin/activate
-pip install -r requirements.txt
+# 6. Install the required Python packages globally
+sudo python3.12 -m pip install -r requirements.txt
 
-# 9. Install torch and torchvision NVIDEA CUDA 12.1
-pip install torch==2.2.1+cu121 torchvision==0.17.1+cu121 --index-url https://download.pytorch.org/whl/cu121
+# 7. Install torch and torchvision NVIDIA CUDA 12.1 globally
+sudo python3.12 -m pip install torch==2.2.1+cu121 torchvision==0.17.1+cu121 --index-url https://download.pytorch.org/whl/cu121
