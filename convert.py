@@ -71,9 +71,12 @@ def upscale_image_with_mangajanai(image_path, output_folder, venv_path, mangajan
     cmd_str = ' '.join([quote(arg) if i in [0,1,3,5] else arg for i, arg in enumerate(cmd)])
     print(f"Comando a ejecutar: {cmd_str}")
     print(f"Upscaling {image_path} ...")
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    if result.returncode != 0:
-        print(f"Error en upscale de {image_path}:\n{result.stderr}")
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    for line in process.stdout:
+        print(line, end='')
+    process.wait()
+    if process.returncode != 0:
+        print(f"Error en upscale de {image_path}")
     else:
         print(f"Upscale terminado para {image_path}")
 
@@ -93,9 +96,12 @@ def upscale_folder_with_mangajanai(input_folder, output_folder, venv_path, manga
     cmd_str = ' '.join([quote(arg) if i in [0,1,3,5] else arg for i, arg in enumerate(cmd)])
     print(f"Comando a ejecutar: {cmd_str}")
     print(f"Upscaling carpeta {input_folder} ...")
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    if result.returncode != 0:
-        print(f"Error en upscale de {input_folder}:\n{result.stderr}")
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    for line in process.stdout:
+        print(line, end='')
+    process.wait()
+    if process.returncode != 0:
+        print(f"Error en upscale de {input_folder}")
     else:
         print(f"Upscale terminado para {input_folder}")
 
