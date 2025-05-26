@@ -1,15 +1,15 @@
 @echo off
-REM 0. Instala dependencias necesarias (git, wget, unzip) si no existen
+REM 0. Instala dependencias necesarias (git, curl, tar) si no existen
 where git >nul 2>nul || (
     echo Git no encontrado. Por favor instala Git manualmente.
     exit /b 1
 )
-where wget >nul 2>nul || (
-    echo wget no encontrado. Por favor instala wget manualmente o usa curl.
+where curl >nul 2>nul || (
+    echo curl no encontrado. Por favor instala curl manualmente.
     exit /b 1
 )
-where unzip >nul 2>nul || (
-    echo unzip no encontrado. Por favor instala unzip manualmente.
+where tar >nul 2>nul || (
+    echo tar no encontrado. Por favor instala tar manualmente.
     exit /b 1
 )
 
@@ -22,10 +22,10 @@ cd IA-MangaJaNai-CLI
 REM 2. Descarga los modelos si no existen
 if not exist "models" (
     mkdir models
-    wget -O models/IllustrationJaNai_V1_ModelsOnly.zip https://github.com/the-database/MangaJaNai/releases/download/1.0.0/IllustrationJaNai_V1_ModelsOnly.zip
-    wget -O models/MangaJaNai_V1_ModelsOnly.zip https://github.com/the-database/MangaJaNai/releases/download/1.0.0/MangaJaNai_V1_ModelsOnly.zip
-    unzip models/IllustrationJaNai_V1_ModelsOnly.zip -d models
-    unzip models/MangaJaNai_V1_ModelsOnly.zip -d models
+    curl -L -o models/IllustrationJaNai_V1_ModelsOnly.zip https://github.com/the-database/MangaJaNai/releases/download/1.0.0/IllustrationJaNai_V1_ModelsOnly.zip
+    curl -L -o models/MangaJaNai_V1_ModelsOnly.zip https://github.com/the-database/MangaJaNai/releases/download/1.0.0/MangaJaNai_V1_ModelsOnly.zip
+    tar -xf models/IllustrationJaNai_V1_ModelsOnly.zip -C models
+    tar -xf models/MangaJaNai_V1_ModelsOnly.zip -C models
 )
 
 REM 3. Crea y activa un entorno virtual con Python (usa python instalado en el sistema)
