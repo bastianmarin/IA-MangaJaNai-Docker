@@ -15,9 +15,11 @@ This repository is designed to facilitate the extraction, enhancement (upscale),
 - **GPU:** NVIDIA with at least 12 GB VRAM (e.g., RTX 3060 or higher)
 - **Python:** The script will automatically install Python 3.12 if not present
 
-> **Note:** Currently, **there is no support for NVIDIA 5000 series GPUs** (e.g., RTX 4090, 4080, etc.).
+> **Note:** Currently, **there is no support for NVIDIA 5000 series GPUs**
 
 ## Installation
+
+### Linux (Recommended: Ubuntu)
 
 1. **Clone the repository and enter the folder:**
 
@@ -36,7 +38,30 @@ chmod +x install.sh
 
 This will install all necessary dependencies, Python, the AI models, and set up the environment.
 
+### Windows
+
+> **Important:** You must have Python 3.12 already installed and available in your PATH on Windows. The scripts will not work with other Python versions or if Python 3.12 is not in your PATH.
+
+1. **Clone this repository and enter the folder:**
+
+Open PowerShell or CMD and run:
+
+```powershell
+git clone https://github.com/bastianmarin/IA-MangaJaNai-Docker.git
+cd IA-MangaJaNai-Docker
+```
+
+2. **Run the Windows installer:**
+
+```powershell
+install_win.bat
+```
+
+This will install all required dependencies, download the models, and create the virtual environment.
+
 ## Usage
+
+### Linux
 
 1. **Place your PDF files in the `input/` folder**
 
@@ -47,6 +72,28 @@ python3.12 convert.py
 ```
 
 3. **Results:**
+   - Extracted and upscaled images are saved in the `output/` folder.
+   - Final CBZ files are found in the `zip/` folder.
+
+### Windows
+
+1. **Place your PDF files in the `input/` folder**
+
+2. **Activate the virtual environment:**
+
+```bat
+venv_shell.bat
+```
+
+This will open a terminal with the virtual environment activated.
+
+3. **Run the main script:**
+
+```bat
+python convert.py
+```
+
+4. **Results:**
    - Extracted and upscaled images are saved in the `output/` folder.
    - Final CBZ files are found in the `zip/` folder.
 
