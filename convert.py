@@ -71,12 +71,9 @@ def upscale_image_with_mangajanai(image_path, output_folder, venv_path, mangajan
     cmd_str = ' '.join([quote(arg) if i in [0,1,3,5] else arg for i, arg in enumerate(cmd)])
     print(f"Comando a ejecutar: {cmd_str}")
     print(f"Upscaling {image_path} ...")
-    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-    for line in process.stdout:
-        print(line, end='')
-    process.wait()
-    if process.returncode != 0:
-        print(f"Error en upscale de {image_path}")
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"Error en upscale de {image_path}:\n{result.stderr}")
     else:
         print(f"Upscale terminado para {image_path}")
 
@@ -96,12 +93,9 @@ def upscale_folder_with_mangajanai(input_folder, output_folder, venv_path, manga
     cmd_str = ' '.join([quote(arg) if i in [0,1,3,5] else arg for i, arg in enumerate(cmd)])
     print(f"Comando a ejecutar: {cmd_str}")
     print(f"Upscaling carpeta {input_folder} ...")
-    process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-    for line in process.stdout:
-        print(line, end='')
-    process.wait()
-    if process.returncode != 0:
-        print(f"Error en upscale de {input_folder}")
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"Error en upscale de {input_folder}:\n{result.stderr}")
     else:
         print(f"Upscale terminado para {input_folder}")
 
@@ -109,11 +103,7 @@ def compress_to_cbz(folder_path, zip_dir):
     base_name = os.path.join(zip_dir, os.path.basename(folder_path))
     shutil.make_archive(base_name, 'zip', root_dir=folder_path)
     zip_file = base_name + ".zip"
-    cbz_file = base_name + ".cbz"
-    if os.path.exists(cbz_file):
-        os.remove(cbz_file)
-    os.rename(zip_file, cbz_file)
-    print(f"CBZ creado: {cbz_file}")
+    print(f"ZIP creado: {zip_file}")
 
 def main():
     base_path = os.path.dirname(os.path.abspath(__file__))
@@ -132,7 +122,7 @@ def main():
             os.makedirs(upscaled_folder, exist_ok=True)
             # Upscale todo el directorio de una vez
             upscale_folder_with_mangajanai(folder_path, upscaled_folder, venv_path, mangajanai_src_path)
-            print(f"\nComprimiendo {upscaled_folder} a CBZ...")
+            print(f"\nComprimiendo {upscaled_folder} a ZIP...")
             compress_to_cbz(upscaled_folder, zip_dir)
 
     print("\nProceso completo.")
